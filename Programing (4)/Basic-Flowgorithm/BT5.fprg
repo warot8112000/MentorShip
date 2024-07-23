@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="macos"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-20 08:48:49 PM"/>
+        <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6MDY6MTEgUE07MjQyMg=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjA7MDg6NDg6NDkgUE07MTA7MjU5MA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, j, temp" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="arr" type="Integer" array="True" size="n"/>
+            <output expression="&quot;C&#225;c ph&#7847;n t&#7917; l&#7847;n l&#432;&#7907;t l&#224;: &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="arr[i]" expression="RANDOM(9)"/>
+                <output expression="arr[i]" newline="False"/>
+                <output expression="&quot; &quot;" newline="False"/>
+            </for>
+            <output expression="&quot; &quot;" newline="True"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <for variable="j" start="i+1" end="n-1" direction="inc" step="1">
+                    <if expression="arr[j] &lt; arr[i]">
+                        <then>
+                            <assign variable="temp" expression="arr[j]"/>
+                            <assign variable="arr[j]" expression="arr[i]"/>
+                            <assign variable="arr[i]" expression="temp"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+                <output expression="arr[i]" newline="False"/>
+                <output expression="&quot; &quot;" newline="False"/>
+            </for>
+            <output expression="&quot;done&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="isPrime" type="Boolean" variable="result">
+        <parameters>
+            <parameter name="num" type="Integer" array="False"/>
+        </parameters>
+        <body/>
+    </function>
+</flowgorithm>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="macos"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-19 05:28:55 PM"/>
+        <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6MDY6MTEgUE07MjQyMg=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6Mjg6NTUgUE07MjsyNTQz"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <input variable="n"/>
+            <declare name="arr" type="Integer" array="True" size="n"/>
+            <output expression="&quot;C&#225;c ph&#7847;n t&#7917; l&#7847;n l&#432;&#7907;t l&#224;: &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="arr[i]" expression="RANDOM(9)"/>
+                <output expression="arr[i]" newline="False"/>
+                <output expression="&quot; &quot;" newline="False"/>
+                <assign variable="sum" expression="sum + arr[i]"/>
+            </for>
+            <output expression="&quot; &quot;" newline="True"/>
+            <output expression="&quot;T&#7893;ng c&#225;c ph&#226;n t&#7917; l&#224;: &quot;" newline="False"/>
+            <output expression="sum" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

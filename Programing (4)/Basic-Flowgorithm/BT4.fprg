@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="macos"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-22 08:05:14 AM"/>
+        <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6MDY6MTEgUE07MjQyMg=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjI7MDg6MDU6MTQgQU07MTA7MjU2Mg=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, min, max" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="arr" type="Integer" array="True" size="n"/>
+            <output expression="&quot;C&#225;c ph&#7847;n t&#7917; l&#7847;n l&#432;&#7907;t l&#224;: &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="arr[i]" expression="RANDOM(9)"/>
+                <output expression="arr[i]" newline="False"/>
+                <output expression="&quot; &quot;" newline="False"/>
+            </for>
+            <output expression="&quot; &quot;" newline="True"/>
+            <assign variable="max" expression="arr[1]"/>
+            <assign variable="min" expression="arr[1]"/>
+            <for variable="i" start="1" end="n-1" direction="inc" step="1">
+                <if expression="arr[i] &gt; max">
+                    <then>
+                        <assign variable="max" expression="arr[i]"/>
+                    </then>
+                    <else/>
+                </if>
+                <if expression="arr[i] &lt; min">
+                    <then>
+                        <assign variable="min" expression="arr[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;MAX: &quot;" newline="False"/>
+            <output expression="max" newline="True"/>
+            <output expression="&quot;MIN: &quot;" newline="False"/>
+            <output expression="min" newline="False"/>
+        </body>
+    </function>
+    <function name="isPrime" type="Boolean" variable="result">
+        <parameters>
+            <parameter name="num" type="Integer" array="False"/>
+        </parameters>
+        <body/>
+    </function>
+</flowgorithm>

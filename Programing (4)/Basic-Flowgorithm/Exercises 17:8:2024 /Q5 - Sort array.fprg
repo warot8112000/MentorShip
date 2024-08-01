@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="macos"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-26 07:11:49 PM"/>
+        <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6MDY6MTEgUE07MjQyMg=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjY7MDY6NTA6MzQgUE07MTttYWNvcztNQUNPU0Y0MUM7MjAyNC0wNy0xOTswNTowNjoxMSBQTTtCVDQuZnByZzs1NzUy"/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjY7MDc6MTE6NDkgUE07MTE7MjU4Ng=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Generate a list of arrays each containing n elements with random integers ranging from 0 to 9. Sort them in descending and ascending order.&quot;" newline="True"/>
+            <declare name="n, i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Input n: &quot;" newline="True"/>
+            <input variable="n"/>
+            <assign variable="n" expression="checkN(n)"/>
+            <declare name="arr" type="Integer" array="True" size="n"/>
+            <output expression="&quot;C&#225;c ph&#7847;n t&#7917; l&#7847;n l&#432;&#7907;t l&#224;:&quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="arr[i]" expression="RANDOM(9)"/>
+                <output expression="&quot; &quot; &amp;arr[i]" newline="False"/>
+            </for>
+            <output expression="&quot; &quot;" newline="True"/>
+            <output expression="&quot;The elements of the array in descending order: &quot;" newline="False"/>
+            <call expression="sortDescending(arr, n)"/>
+            <call expression="printArray(arr, n)"/>
+            <output expression="&quot; &quot;" newline="True"/>
+            <output expression="&quot;The elements of the array in ascending order: &quot;" newline="False"/>
+            <call expression="sortAscending(arr, n)"/>
+            <call expression="printArray(arr, n)"/>
+        </body>
+    </function>
+    <function name="checkN" type="Integer" variable="n">
+        <parameters>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <while expression="n &lt; 1">
+                <output expression="&quot;Invalid input, please re-enter n: &quot;" newline="True"/>
+                <input variable="n"/>
+            </while>
+        </body>
+    </function>
+    <function name="printArray" type="None" variable="">
+        <parameters>
+            <parameter name="arr" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot; &quot; &amp;arr[i]" newline="False"/>
+            </for>
+        </body>
+    </function>
+    <function name="sortAscending" type="None" variable="">
+        <parameters>
+            <parameter name="arr" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, j" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <for variable="j" start="i+1" end="n-1" direction="inc" step="1">
+                    <if expression="arr[j] &gt; arr[i]">
+                        <then>
+                            <declare name="temp" type="Integer" array="False" size=""/>
+                            <assign variable="temp" expression="arr[j]"/>
+                            <assign variable="arr[j]" expression="arr[i]"/>
+                            <assign variable="arr[i]" expression="temp"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="sortDescending" type="None" variable="">
+        <parameters>
+            <parameter name="arr" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, j" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <for variable="j" start="i+1" end="n-1" direction="inc" step="1">
+                    <if expression="arr[j] &lt; arr[i]">
+                        <then>
+                            <declare name="temp" type="Integer" array="False" size=""/>
+                            <assign variable="temp" expression="arr[j]"/>
+                            <assign variable="arr[j]" expression="arr[i]"/>
+                            <assign variable="arr[i]" expression="temp"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

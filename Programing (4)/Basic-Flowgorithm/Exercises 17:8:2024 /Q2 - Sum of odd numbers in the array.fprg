@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="macos"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-26 05:18:35 PM"/>
+        <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6MDY6MTEgUE07MjQyMg=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjY7MDU6MTg6MzUgUE07NzsyNTQz"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Generate a list of arrays containing n elements with random integers ranging from 0 to 9. Compute the sum of the elements at odd indices within each array&quot;" newline="True"/>
+            <declare name="n, i, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <output expression="&quot;Input n: &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="arr" type="Integer" array="True" size="n"/>
+            <assign variable="sum" expression="sumOddElements(arr, n)"/>
+            <output expression="&quot; &quot;" newline="True"/>
+            <output expression="&quot;Sum of the odd elements is: &quot; &amp;sum" newline="False"/>
+        </body>
+    </function>
+    <function name="sumOddElements" type="Integer" variable="sum">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="sum, i" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <output expression="&quot;The elements are: &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(9)"/>
+                <output expression="&quot; &quot; %a[i]" newline="False"/>
+                <if expression="a[i] % 2 != 0">
+                    <then>
+                        <assign variable="sum" expression="sum + a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="macos"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-08-01 02:42:38 PM"/>
+        <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMzE7MTA6NDY6MTkgUE07MjQyNA=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMzE7MTE6MDk6NDggUE07MjttYWNvcztNQUNPU0Y0MUM7MjAyNC0wNy0xOTswNTowNjoxMSBQTTtRNCAtIE1pbiwgbWF4IHZhbHVlIGluIHRoZSBhcnJheS5mcHJnOzgyMzY="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMzE7MTE6MTg6NTYgUE07MTttYWNvcztNQUNPU0Y0MUM7MjAyNC0wNy0zMDsxMDoxODozNSBQTTtGaW5kIHRoZSBtb3N0IGZyZXF1ZW50IGVsZW1lbnQgaW4gYW4gYXJyYXkuLmZwcmc7OTU2MA=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDgtMDE7MDI6NDI6MzggUE07NDsyNTMx"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Insert an element at a specified index in the array&quot;" newline="True"/>
+            <declare name="n, position, x" type="Integer" array="False" size=""/>
+            <output expression="&quot;Input n: &quot;" newline="True"/>
+            <input variable="n"/>
+            <assign variable="n" expression="checkInputN(n)"/>
+            <output expression="&quot;Input the position you want to insert: &quot;" newline="True"/>
+            <input variable="position"/>
+            <assign variable="position" expression="checkInputPosition(position, n)"/>
+            <output expression="&quot;Input the value you want to insert &quot;" newline="True"/>
+            <input variable="x"/>
+            <declare name="a" type="Integer" array="True" size="n+1"/>
+            <output expression="&quot;Array before deleting the element: &quot;" newline="True"/>
+            <call expression="randomArray(a, n)"/>
+            <call expression="insertElement(a, n, position, x)"/>
+            <output expression="&quot;Array after inserting the element: &quot;" newline="True"/>
+            <call expression="printArray(a,n)"/>
+        </body>
+    </function>
+    <function name="checkInputN" type="Integer" variable="n">
+        <parameters>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <while expression="n &lt; 1">
+                <output expression="&quot;Invalid input, please re-enter n: &quot;" newline="True"/>
+                <input variable="n"/>
+            </while>
+        </body>
+    </function>
+    <function name="checkInputPosition" type="Integer" variable="position">
+        <parameters>
+            <parameter name="position" type="Integer" array="False"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <while expression="position &lt; 1 || position &gt; n + 1">
+                <output expression="&quot;Invalid input, please re-enter position: &quot;" newline="True"/>
+                <input variable="position"/>
+            </while>
+        </body>
+    </function>
+    <function name="insertElement" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+            <parameter name="position" type="Integer" array="False"/>
+            <parameter name="x" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="flag" type="Boolean" array="False" size=""/>
+            <assign variable="flag" expression="true"/>
+            <declare name="i, temp" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n" direction="inc" step="1">
+                <if expression="i = position- 1">
+                    <then>
+                        <assign variable="temp" expression="a[i]"/>
+                        <assign variable="flag" expression="false"/>
+                        <assign variable="a[i]" expression="x"/>
+                    </then>
+                    <else/>
+                </if>
+                <if expression="flag = false &amp;&amp; position -1 != i">
+                    <then>
+                        <assign variable="a[i]" expression="temp"/>
+                        <assign variable="temp" expression="a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+    <function name="printArray" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n" direction="inc" step="1">
+                <output expression="&quot; &quot; &amp;a[i]" newline="False"/>
+            </for>
+        </body>
+    </function>
+    <function name="randomArray" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(9)"/>
+                <output expression="&quot; &quot; &amp;a[i]" newline="False"/>
+            </for>
+            <output expression="&quot; &quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

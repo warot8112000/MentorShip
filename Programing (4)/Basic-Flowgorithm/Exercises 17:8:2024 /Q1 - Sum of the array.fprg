@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="macos"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-26 07:18:44 PM"/>
+        <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6MDY6MTEgUE07MjQyMg=="/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjY7MDc6MTY6NDAgUE07MTttYWNvcztNQUNPU0Y0MUM7MjAyNC0wNy0xOTswNTowNjoxMSBQTTtCVDQuZnByZzs1NzUy"/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjY7MDc6MTg6NDQgUE07NjsyNTQ0"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;Generate a list of arrays containing n elements with random integers ranging from 0 to 9. Compute the sum of the elements in each array.&quot;" newline="True"/>
+            <declare name="n, sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <output expression="&quot;Input n: &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="arr" type="Integer" array="True" size="n"/>
+            <assign variable="n" expression="checkN(n)"/>
+            <call expression="randomizeArrayElements(arr, n)"/>
+            <assign variable="sum" expression="sumElements(arr, n)"/>
+            <output expression="&quot; &quot;" newline="True"/>
+            <output expression="&quot;Sum of the elements is: &quot; &amp;sum" newline="False"/>
+        </body>
+    </function>
+    <function name="checkN" type="Integer" variable="n">
+        <parameters>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <while expression="n &lt; 1">
+                <output expression="&quot;Invalid input, please re-enter n: &quot;" newline="True"/>
+                <input variable="n"/>
+            </while>
+        </body>
+    </function>
+    <function name="randomizeArrayElements" type="None" variable="">
+        <parameters>
+            <parameter name="arr" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;The elements are: &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="arr[i]" expression="RANDOM(9)"/>
+                <output expression="arr[i] &amp; &quot; &quot;" newline="False"/>
+            </for>
+        </body>
+    </function>
+    <function name="sumElements" type="Integer" variable="sum">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="sum, i" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="sum" expression="sum + a[i]"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

@@ -4,32 +4,22 @@
         <attribute name="name" value=""/>
         <attribute name="authors" value="macos"/>
         <attribute name="about" value=""/>
-        <attribute name="saved" value="2024-07-20 07:51:29 PM"/>
+        <attribute name="saved" value="2024-07-26 05:18:49 PM"/>
         <attribute name="created" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMTk7MDU6MDY6MTEgUE07MjQyMg=="/>
-        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjA7MDc6NTE6MjkgUE07NjsyNTM4"/>
+        <attribute name="edited" value="bWFjb3M7TUFDT1NGNDFDOzIwMjQtMDctMjY7MDU6MTg6NDkgUE07OTsyNTUw"/>
     </attributes>
     <function name="Main" type="None" variable="">
         <parameters/>
         <body>
+            <output expression="&quot;Generate a list of arrays containing n elements with random integers ranging from 0 to 9. Compute the sum of the elements that are prime numbers&quot;" newline="True"/>
             <declare name="n, i, sum" type="Integer" array="False" size=""/>
             <assign variable="sum" expression="0"/>
+            <output expression="&quot;Input n: &quot;" newline="True"/>
             <input variable="n"/>
             <declare name="arr" type="Integer" array="True" size="n"/>
-            <output expression="&quot;C&#225;c ph&#7847;n t&#7917; l&#7847;n l&#432;&#7907;t l&#224;: &quot;" newline="False"/>
-            <for variable="i" start="0" end="n-1" direction="inc" step="1">
-                <assign variable="arr[i]" expression="RANDOM(9)"/>
-                <output expression="arr[i]" newline="False"/>
-                <output expression="&quot; &quot;" newline="False"/>
-                <if expression="isPrime(arr[i])">
-                    <then>
-                        <assign variable="sum" expression="sum + arr[i]"/>
-                    </then>
-                    <else/>
-                </if>
-            </for>
+            <assign variable="sum" expression="sumPrimeElements(arr, n)"/>
             <output expression="&quot; &quot;" newline="True"/>
-            <output expression="&quot;T&#7893;ng c&#225;c ph&#226;n t&#7917; l&#224; s&#7889; nguy&#234;n t&#7889; l&#224;: &quot;" newline="False"/>
-            <output expression="sum" newline="True"/>
+            <output expression="&quot;The sum of prime numbers is: &quot; &amp;sum" newline="False"/>
         </body>
     </function>
     <function name="isPrime" type="Boolean" variable="result">
@@ -57,6 +47,27 @@
                     </while>
                 </else>
             </if>
+        </body>
+    </function>
+    <function name="sumPrimeElements" type="Integer" variable="sum">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="sum, i" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <output expression="&quot;The elements are: &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(9)"/>
+                <output expression="&quot; &quot; &amp;a[i]" newline="False"/>
+                <if expression="isPrime(a[i])">
+                    <then>
+                        <assign variable="sum" expression="sum + a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
         </body>
     </function>
 </flowgorithm>

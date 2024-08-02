@@ -61,7 +61,7 @@ Find the minimum element of an array
 
 ![image](https://github.com/user-attachments/assets/8f616f43-0a56-47ff-87a6-c721addeee40)
 
-### 4. Sort the array in ascending and descending order
+### 5. Sort the array in ascending and descending order
 Generate a list of arrays containing n elements with random integers ranging from 0 to 9. Sort the array in ascending and descending order.
 
 <img width="433" alt="Image 1" src="https://github.com/user-attachments/assets/e58f449e-9203-4298-96a5-a2448f42c93c">

@@ -50,16 +50,15 @@ This function computes the sum of all prime numbers within a given array of inte
 ### 4. Find the minimum and maximum values of the array
 Generate a list of arrays containing n elements with random integers ranging from 0 to 9. Find the minimum and maximum values of the array.
 
-
-![image](https://github.com/user-attachments/assets/12399fc9-e5fe-486b-992e-cc71e738d331)
+<img width="433" alt="Image 1" src="https://github.com/user-attachments/assets/12399fc9-e5fe-486b-992e-cc71e738d331">
 
 Find the max element of an array
 
-![image](https://github.com/user-attachments/assets/ac936e3b-5bab-4263-a88d-16ee7d0e8a05)
+<img width="433" alt="Image 2" src="https://github.com/user-attachments/assets/ac936e3b-5bab-4263-a88d-16ee7d0e8a05">
 
 Find the minimum element of an array
 
-![image](https://github.com/user-attachments/assets/8f616f43-0a56-47ff-87a6-c721addeee40)
+<img width="433" alt="Image 3" src="https://github.com/user-attachments/assets/8f616f43-0a56-47ff-87a6-c721addeee40">
 
 ### 5. Sort the array in ascending and descending order
 Generate a list of arrays containing n elements with random integers ranging from 0 to 9. Sort the array in ascending and descending order.

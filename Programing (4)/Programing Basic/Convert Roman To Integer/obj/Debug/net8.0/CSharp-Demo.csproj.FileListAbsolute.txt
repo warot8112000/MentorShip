@@ -1,0 +1,14 @@
+/Users/macos/Desktop/CSharp-Demo/bin/Debug/net8.0/CSharp-Demo
+/Users/macos/Desktop/CSharp-Demo/bin/Debug/net8.0/CSharp-Demo.deps.json
+/Users/macos/Desktop/CSharp-Demo/bin/Debug/net8.0/CSharp-Demo.runtimeconfig.json
+/Users/macos/Desktop/CSharp-Demo/bin/Debug/net8.0/CSharp-Demo.dll
+/Users/macos/Desktop/CSharp-Demo/bin/Debug/net8.0/CSharp-Demo.pdb
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/CSharp-Demo.GeneratedMSBuildEditorConfig.editorconfig
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/CSharp-Demo.AssemblyInfoInputs.cache
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/CSharp-Demo.AssemblyInfo.cs
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/CSharp-Demo.csproj.CoreCompileInputs.cache
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/CSharp-Demo.dll
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/refint/CSharp-Demo.dll
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/CSharp-Demo.pdb
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/CSharp-Demo.genruntimeconfig.cache
+/Users/macos/Desktop/CSharp-Demo/obj/Debug/net8.0/ref/CSharp-Demo.dll

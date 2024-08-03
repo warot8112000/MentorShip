@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Convert Integer To Roman")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a710def2045e1b2608b3a9a2ecc136c3ec716ab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4478db7dadfb20559f981cba4225b136ebc8de28")]
 [assembly: System.Reflection.AssemblyProductAttribute("Convert Integer To Roman")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Convert Integer To Roman")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

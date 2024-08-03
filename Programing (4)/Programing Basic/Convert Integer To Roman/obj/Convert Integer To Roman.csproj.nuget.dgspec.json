@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj": {}
+    "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj": {}
   },
   "projects": {
-    "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj": {
+    "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj",
+        "projectUniqueName": "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj",
         "projectName": "Convert Integer To Roman",
-        "projectPath": "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj",
+        "projectPath": "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/Convert Integer To Roman.csproj",
         "packagesPath": "/Users/macos/.nuget/packages/",
-        "outputPath": "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/obj/",
+        "outputPath": "/Users/macos/Documents/Lập trình/MentorShip_Program/Programing (4)/Programing Basic/Convert Integer To Roman/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/macos/.nuget/NuGet/NuGet.Config"

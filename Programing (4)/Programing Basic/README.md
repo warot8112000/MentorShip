@@ -10,7 +10,8 @@ Solution: When you enter Roman letters. We will have 2 cases:
 - **Case 2**: A smaller value appears after or equal to a larger value. We'll do addition (III = 1 + 1 + 1)
 
 Additionally, before converting from Roman to Integer, check that it is a valid Roman numeral.
-```
+
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -77,7 +78,7 @@ The program uses two arrays: romanNumbers, which contains Roman numeral symbols 
 
 For each symbol, if the input number is greater than or equal to the value of that symbol, the program adds the symbol to the result string and subtracts the value of that symbol from the number.
 
-```
+```csharp
 string romanNumber;
 int number;
 do

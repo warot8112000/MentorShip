@@ -1,0 +1,11 @@
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/bin/Debug/net8.0/DigitalAssetManagement
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/bin/Debug/net8.0/DigitalAssetManagement.dll
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/bin/Debug/net8.0/DigitalAssetManagement.pdb
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/DigitalAssetManagement.GeneratedMSBuildEditorConfig.editorconfig
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/DigitalAssetManagement.AssemblyInfoInputs.cache
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/DigitalAssetManagement.AssemblyInfo.cs
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/DigitalAssetManagement.csproj.CoreCompileInputs.cache
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/DigitalAssetManagement.sourcelink.json
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/DigitalAssetManagement.dll
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/refint/DigitalAssetManagement.dll
+/Users/macos/Documents/Lập trình/MentorShip_Program/Digital Asset Management (6)/Digital Asset Management/DigitalAssetManagement/obj/Debug/net8.0/DigitalAssetManagement.pdb

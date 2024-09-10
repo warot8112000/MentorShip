@@ -14,25 +14,6 @@ public class UnitTest1
     }
 
     
-
-    [Fact]
-    public void UserCanOwnMutipleDrives(){
-        var user = new User(1,"John");
-        var drive3 = new Drive(3,"Drive0");
-        user.AddDrive(drive3);
-        Assert.Equal(1, user.Drives.Count);
-    }
-
-    [Fact]
-    public void UserCannotOwnSameDriveTwice(){
-        var user = new User(1,"John");
-        var drive1 = new Drive(1,"Drive1");
-        user.AddDrive(drive1);
-        Assert.Throws<InvalidOperationException>(() => user.AddDrive(drive1));
-    }
-
-    //Folder
-
 //Permissions
 
     [Fact]

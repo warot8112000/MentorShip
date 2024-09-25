@@ -1,6 +1,6 @@
 namespace Linq.Tests;
 
-public class Where
+public class Demo
 {
     [Fact]
     public void Where_FilterEvenNumbers()

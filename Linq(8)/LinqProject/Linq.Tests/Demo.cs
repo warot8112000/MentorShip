@@ -12,4 +12,15 @@ public class Demo
         List<int> expected = new() { 2, 4, 6, 8, 10 };
         Assert.Equal(expected, result);
     }
+    
+    [Fact]
+    public void Select_SquareNumbers()
+    {
+        List<a> numbers = new() { 1, 2, 3, 4, 5 };
+
+        List<int> result = LinQ.From(numbers).Select(x => x * x).ToList();
+
+        List<int> expected = new() { 1, 4, 9, 16, 25 };
+        Assert.Equal(expected, result);
+    }
 }

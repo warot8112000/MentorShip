@@ -1,4 +1,5 @@
-public static class LinQ{
+public static class LinQ
+{
     public static Linq<T> From<T>(List<T> elements)
     {
         return new Linq<T>(elements);
@@ -7,7 +8,7 @@ public static class LinQ{
 
 public class Linq<T>
 {
-   public List<T> elements;
+    public List<T> elements;
 
     public Linq(List<T> elements)
     {
@@ -31,4 +32,25 @@ public class Linq<T>
     {
         return new List<T>(elements);
     }
+
+    public Linq<T> OrderBy<TKey>(Func<T, TKey> keySelector) where TKey : IComparable<TKey>
+    {
+        var sortedList = new List<T>(elements);
+
+        sortedList.Sort((x, y) =>
+        {
+            TKey keyX = keySelector(x);
+            TKey keyY = keySelector(y);
+            return keyX.CompareTo(keyY);
+        });
+        return new Linq<T>(sortedList);
+    }
+
+    public Linq<T> OrderByDescending<TKey>(Func<T, TKey> keySelector) where TKey : IComparable<TKey>
+    {
+        var sortedList = new List<T>(elements);
+        sortedList.Sort((x, y) => keySelector(y).CompareTo(keySelector(x)));
+        return new Linq<T>(sortedList);
+    }
+
 }

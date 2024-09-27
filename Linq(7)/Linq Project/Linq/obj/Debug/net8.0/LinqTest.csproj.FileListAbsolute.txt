@@ -1,0 +1,14 @@
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\LinqTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\LinqTest.AssemblyInfoInputs.cache
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\LinqTest.AssemblyInfo.cs
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\LinqTest.csproj.CoreCompileInputs.cache
+C:\Users\macos\source\repos\LinqTest\LinqTest\bin\Debug\net8.0\LinqTest.exe
+C:\Users\macos\source\repos\LinqTest\LinqTest\bin\Debug\net8.0\LinqTest.deps.json
+C:\Users\macos\source\repos\LinqTest\LinqTest\bin\Debug\net8.0\LinqTest.runtimeconfig.json
+C:\Users\macos\source\repos\LinqTest\LinqTest\bin\Debug\net8.0\LinqTest.dll
+C:\Users\macos\source\repos\LinqTest\LinqTest\bin\Debug\net8.0\LinqTest.pdb
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\LinqTest.dll
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\refint\LinqTest.dll
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\LinqTest.pdb
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\LinqTest.genruntimeconfig.cache
+C:\Users\macos\source\repos\LinqTest\LinqTest\obj\Debug\net8.0\ref\LinqTest.dll

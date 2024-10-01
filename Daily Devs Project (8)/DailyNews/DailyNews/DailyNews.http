@@ -1,0 +1,6 @@
+@DailyNews_HostAddress = http://localhost:5019
+
+GET {{DailyNews_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

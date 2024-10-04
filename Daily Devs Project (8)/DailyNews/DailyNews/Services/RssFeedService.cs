@@ -5,50 +5,45 @@ namespace DailyNews.Services
 {
     public class RssFeedService
     {
-        private readonly DailyNewsContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public RssFeedService(DailyNewsContext context)
+        public RssFeedService(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task FetchAndStoreArticlesAsync()
+        
+        public async Task FetchAndSaveArticlesFromRssCategories()
         {
-            var rssSources = await _context.RsSources.ToListAsync(); 
+            var rssCategories = await _context.RssCategories.ToListAsync();
 
-            foreach (var source in rssSources)
+            using (var httpClient = new HttpClient())
             {
-                var articles = await FetchRssFeedAsync(source.Url); // Lấy bài viết từ nguồn RSS
-                foreach (var article in articles)
-                {                   
-                    if (!_context.Articles.Any(a => a.Url == article.Url))
+                foreach (var rssCategory in rssCategories)
+                {
+                    var xml = await httpClient.GetStringAsync(rssCategory.Url);
+                    var doc = XDocument.Parse(xml);
+
+                    foreach (var item in doc.Descendants("item"))
                     {
-                        article.RssSourceId = source.Id; 
-                        _context.Articles.Add(article); 
+                        var article = new Article
+                        {
+                            Title = item.Element("title")?.Value ?? "Default Title", 
+                            Url = item.Element("link")?.Value ?? "https://default.url", 
+                            Content = item.Element("description")?.Value ?? "No content available", 
+                            PublishedAt = DateTime.TryParse(item.Element("pubDate")?.Value, out var publishedDate) ? publishedDate : DateTime.Now, 
+                            RssCategoryId = rssCategory.Id,
+                            Guid = item.Element("guid")?.Value ?? "Default GUID", 
+                            EnclosureUrl = item.Element("enclosure")?.Attribute("url")?.Value ?? "https://default.enclosure.url" 
+
+                        };
+
+                        // Lưu bài viết vào cơ sở dữ liệu
+                        _context.Articles.Add(article);
                     }
+                    await _context.SaveChangesAsync();
                 }
             }
-
-            await _context.SaveChangesAsync(); // Lưu thay đổi vào cơ sở dữ liệu
-        }
-
-        //phân tích dữ liệu từ rss và chuyển thành article
-        private async Task<List<Article>> FetchRssFeedAsync(string url)
-        {
-            using HttpClient client = new HttpClient();
-            var xml = await client.GetStringAsync(url); // Lấy dữ liệu XML từ URL
-            XDocument doc = XDocument.Parse(xml); 
-
-            var articles = doc.Descendants("item") //Descendants("item") trả về tất cả các phần tử con <item> trong tài liệu XML
-                .Select(item => new Article
-                {
-                    Title = item.Element("title")?.Value ?? "No Title",
-                    Url = item.Element("link")?.Value ?? string.Empty,
-                    Content = item.Element("description")?.Value,
-                    PublishedAt = DateTime.Parse(item.Element("pubDate")?.Value ?? DateTime.Now.ToString())
-                }).ToList();
-
-            return articles; 
         }
     }
 }

@@ -1,4 +1,5 @@
-using DailyNews;
+﻿using DailyNews;
+using DailyNews.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,10 @@ builder.Services.AddControllers();
 // Register DbContext with SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Đăng ký IHttpClientFactory và RssFeedService
+builder.Services.AddHttpClient(); // Đăng ký IHttpClientFactory
+builder.Services.AddScoped<RssFeedService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

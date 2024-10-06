@@ -1,6 +1,9 @@
-﻿namespace DailyNews.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DailyNews.Model
 {
-    public class Article
+    [Table("Articles")]
+    public class Articles
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -14,6 +17,6 @@
         public string Guid { get; set; }
         public string EnclosureUrl { get; set; }
 
-        public RSSCategory RssCategory { get; set; }
+        public RSS_Category RssCategory { get; set; }
     }
 }

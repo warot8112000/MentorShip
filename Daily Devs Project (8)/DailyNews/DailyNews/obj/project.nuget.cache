@@ -1,13 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "8W7Y82yqKRUxMEIheaA6OzYYxr+NFg5dLiyfiOH8nktCaLVQ64lm5WHVMuM5Wjlu4D/r1yXGq4IoYPvqsRmQPg==",
+  "dgSpecHash": "acLW47D9+W3cc2K56+5EynO+8awJg8B3sTpGqNup7vZ1v5hqv1+ZPmto3r/HnWY/8ffiMwkMCHZsQpWi47EP8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\macos\\source\\repos\\DailyNews\\DailyNews\\DailyNews.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\macos\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\macos\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
-    "C:\\Users\\macos\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\macos\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.5\\microsoft.data.sqlclient.5.1.5.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.1.1\\microsoft.data.sqlclient.sni.runtime.5.1.1.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.8\\microsoft.entityframeworkcore.8.0.8.nupkg.sha512",

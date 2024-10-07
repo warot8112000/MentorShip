@@ -1,4 +1,5 @@
-﻿using DailyNews.DTO;
+﻿using AutoMapper;
+using DailyNews.DTO;
 using DailyNews.Model;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,13 @@ namespace DailyNews.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly RssFeedService _rssService;
+        private readonly IMapper _mapper;
 
-        public ArticlesController(ApplicationDbContext context, RssFeedService rssService)
+        public ArticlesController(ApplicationDbContext context, RssFeedService rssService, IMapper mapper)
         {
             _context = context;
             _rssService = rssService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -48,6 +51,7 @@ namespace DailyNews.Controllers
         [HttpPost]
         public async Task<ActionResult<Articles>> CreateArticle([FromBody] ArticleDto articleDto)
         {
+            //check RSS category hop le
             var rssCategory = await _context.RssCategories
              .Include(c => c.RssSource)  // Kết nối với bảng RssSource
              .Include(c => c.Category)     // Kết nối với bảng Category
@@ -58,19 +62,8 @@ namespace DailyNews.Controllers
                 return NotFound("RssCategory not found.");
             }
 
-            var article = new Articles
-            {
-                Title = articleDto.Title,
-                Url = articleDto.Url,
-                Content = articleDto.Content,
-                PublishedAt = articleDto.PublishedAt,
-                RssCategoryId = articleDto.RssCategoryId, 
-                LikeCount = articleDto.LikeCount,
-                CommentCount = articleDto.CommentCount,
-                CreatedAt = DateTime.UtcNow,
-                Guid = articleDto.Guid,
-                EnclosureUrl = articleDto.EnclosureUrl
-            };
+            var article = _mapper.Map<Articles>(articleDto);
+
 
             _context.Articles.Add(article);
             await _context.SaveChangesAsync();
@@ -81,12 +74,16 @@ namespace DailyNews.Controllers
 
         // PUT: api/article/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateArticle(int id, Articles article)
-        {
-            if (id != article.Id)
+        public async Task<IActionResult> UpdateArticle(int id, ArticleDto articleDto)
+        {            
+
+            var article = await _context.Articles.FindAsync(id);
+            if (article == null)
             {
-                return BadRequest();
+                return NotFound();
             }
+
+            _mapper.Map(articleDto, article); // Cập nhật thông tin từ DTO vào entity
 
             _context.Entry(article).State = EntityState.Modified;
 

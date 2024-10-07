@@ -19,5 +19,18 @@ namespace DailyNews
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Cấu hình các ràng buộc UNIQUE, ví dụ Url phải là duy nhất trong Articles
+            modelBuilder.Entity<Articles>()
+                .HasIndex(a => a.Url)
+                .IsUnique();
+
+            modelBuilder.Entity<Articles>()
+                .HasIndex(a => a.Guid)
+                .IsUnique();
+
+        }
     }
 }

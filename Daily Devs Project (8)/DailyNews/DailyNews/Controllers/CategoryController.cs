@@ -105,5 +105,7 @@ namespace DailyNews.Controllers
         {
             return _context.Categories.Any(e => e.Id == id);
         }
+
+
     }
 }

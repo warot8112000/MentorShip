@@ -22,6 +22,8 @@ namespace DailyNews.Controllers
             _mapper = mapper;
         }
 
+        
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Articles>>> GetArticles()
         {
@@ -39,12 +41,19 @@ namespace DailyNews.Controllers
             }
             return article;
         }
-
-        [HttpPost("fetch")]
+        //Lấy dữ liệu từ RSSCategories -> Articles -> Save in db
+        [HttpPost("fetchArticles")]
         public async Task<IActionResult> FetchArticles()
         {
             await _rssService.FetchAndSaveArticlesFromRssCategories(); // Gọi dịch vụ để lấy bài viết
             return Ok("Articles fetched and stored successfully."); // Trả về thông báo thành công
+        }
+
+        [HttpPost("fetchRssCategories")]
+        public async Task<IActionResult> FetchRssCategories()
+        {
+            await _rssService.GetRssCategoriesFromRssSources();
+            return Ok("RssCategories fetched and stored successfully.");
         }
 
         // POST: api/article

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "acLW47D9+W3cc2K56+5EynO+8awJg8B3sTpGqNup7vZ1v5hqv1+ZPmto3r/HnWY/8ffiMwkMCHZsQpWi47EP8g==",
+  "dgSpecHash": "U+7HWdxPl+BN5HwkOPeBOHy+FOe3I5kOtKaxj79IrR3Y1fKnENMCP3sVnSZeV8HSN57Yf3iR85XEcGy8ikV6Xg==",
   "success": true,
   "projectFilePath": "C:\\Users\\macos\\source\\repos\\DailyNews\\DailyNews\\DailyNews.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\macos\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\macos\\.nuget\\packages\\htmlagilitypack\\1.11.67\\htmlagilitypack.1.11.67.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\macos\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.5\\microsoft.data.sqlclient.5.1.5.nupkg.sha512",

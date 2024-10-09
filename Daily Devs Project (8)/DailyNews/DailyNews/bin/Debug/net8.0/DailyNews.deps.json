@@ -10,6 +10,7 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "HtmlAgilityPack": "1.11.67",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
@@ -71,6 +72,14 @@
           "lib/netstandard2.0/Azure.Identity.dll": {
             "assemblyVersion": "1.10.3.0",
             "fileVersion": "1.1000.323.51804"
+          }
+        }
+      },
+      "HtmlAgilityPack/1.11.67": {
+        "runtime": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "assemblyVersion": "1.11.67.0",
+            "fileVersion": "1.11.67.0"
           }
         }
       },
@@ -611,6 +620,13 @@
       "sha512": "sha512-l1Xm2MWOF2Mzcwuarlw8kWQXLZk3UeB55aQXVyjj23aBfDwOZ3gu5GP2kJ6KlmZeZv2TCzw7x4L3V36iNr3gww==",
       "path": "azure.identity/1.10.3",
       "hashPath": "azure.identity.1.10.3.nupkg.sha512"
+    },
+    "HtmlAgilityPack/1.11.67": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xnt6f8E56oK9nLqgkF42bsVSAkUuIuJnSfvzimK7GwvbhdXWRmGsx4A8AKmLOlCUq1rVSUADKalxnSMizHt4Mg==",
+      "path": "htmlagilitypack/1.11.67",
+      "hashPath": "htmlagilitypack.1.11.67.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",

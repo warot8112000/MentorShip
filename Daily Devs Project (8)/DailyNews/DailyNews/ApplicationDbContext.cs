@@ -5,7 +5,7 @@ namespace DailyNews
 {
     public class ApplicationDbContext : DbContext //lớp tương tác trực tiếp với db
     {
-//        public DbSet<User> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
         public DbSet<RSS_Sources> RssSources { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<RSS_Category> RssCategories { get; set; }

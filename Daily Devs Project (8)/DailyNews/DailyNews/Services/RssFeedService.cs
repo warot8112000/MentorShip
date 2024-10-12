@@ -31,7 +31,7 @@ namespace DailyNews.Services
                 {
                     var rssCategories = await GetRssCategories(rssSource.Url);
                     var newRssCategories = new List<RSS_Category>();
-
+                    rssCategories = rssCategories.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
                     foreach (var categoryUrl in rssCategories)
                     {
                         var category = await GetOrCreateCategory(categoryUrl);
@@ -128,7 +128,8 @@ namespace DailyNews.Services
             {
                 category = new Category
                 {
-                    Name = categoryName
+                    Name = categoryName,
+                    Description = $"RSS feed for category '{categoryName}'"
                 };
                 await _context.Categories.AddAsync(category);
                 await _context.SaveChangesAsync();

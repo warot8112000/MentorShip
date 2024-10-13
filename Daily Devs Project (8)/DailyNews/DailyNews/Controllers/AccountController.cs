@@ -41,7 +41,7 @@ namespace DailyNews.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserDto register)
+        public async Task<IActionResult> Register([FromBody] RegisterDto register)
         {
             if (!ModelState.IsValid)
             {

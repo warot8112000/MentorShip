@@ -10,10 +10,10 @@ namespace DailyNews
         public DbSet<Category> Categories { get; set; }
         public DbSet<RSS_Category> RssCategories { get; set; }
         public DbSet<Articles> Articles { get; set; }
-//        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Tags> Tags { get; set; }
 //        public DbSet<ArticleTag> ArticleTags { get; set; }
 //        public DbSet<Like> Likes { get; set; }
-//        public DbSet<UserTag> UserTags { get; set; }
+        public DbSet<User_Tags> UserTags { get; set; }
 //        public DbSet<Comment> Comments { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

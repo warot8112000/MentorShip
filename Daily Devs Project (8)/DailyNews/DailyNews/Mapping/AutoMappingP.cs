@@ -12,6 +12,8 @@ namespace DailyNews.Mapping
             CreateMap<RSS_Sources, RSS_SourcesDto>().ReverseMap();
             CreateMap<RSS_Category, RSS_CategoryDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Users, UserDto>().ReverseMap();
+            CreateMap<Users, UserDto>();
         }
     }
 }

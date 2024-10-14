@@ -79,8 +79,8 @@ namespace DailyNews.Controllers
         }
 
         //follow tag
-        [HttpPost("{userId}/follow-tag")]
-        public async Task<IActionResult> FollowTag(int userId, [FromBody] int tagId)
+        [HttpPost("{userId}/follow/{tagId}")]
+        public async Task<IActionResult> FollowTag(int userId, int tagId)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user == null)

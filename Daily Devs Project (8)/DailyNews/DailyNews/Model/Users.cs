@@ -12,5 +12,6 @@ namespace DailyNews.Model
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public string PasswordHash { get; set; }
+        public ICollection<User_Tags> UserTags { get; set; }
     }
 }

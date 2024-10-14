@@ -9,5 +9,6 @@ namespace DailyNews.Model
         public string Name { get; set; }
 
         public ICollection<User_Tags> UserTags { get; set; }
+        public ICollection<Article_Tags> ArticleTags { get; set; }
     }
 }

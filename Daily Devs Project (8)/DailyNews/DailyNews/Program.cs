@@ -28,6 +28,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Đăng ký IHttpClientFactory và RssFeedService
 builder.Services.AddHttpClient(); // Đăng ký IHttpClientFactory
 builder.Services.AddScoped<RssFeedService>();
+builder.Services.AddScoped<TagService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

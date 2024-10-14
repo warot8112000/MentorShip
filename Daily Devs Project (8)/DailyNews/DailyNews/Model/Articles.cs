@@ -18,5 +18,6 @@ namespace DailyNews.Model
         public string EnclosureUrl { get; set; }
 
         public RSS_Category RssCategory { get; set; }
+        public ICollection<Article_Tags> ArticleTags { get; set; }
     }
 }

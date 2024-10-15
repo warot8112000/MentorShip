@@ -3,7 +3,6 @@ using DailyNews.DTO;
 using DailyNews.Model;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DailyNews.Controllers
 {
@@ -11,15 +10,11 @@ namespace DailyNews.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        private readonly RssFeedService _rssService;
-        private readonly IMapper _mapper;
+        private readonly AccountService _accountService;
 
-        public AccountController(ApplicationDbContext context, RssFeedService rssService, IMapper mapper)
+        public AccountController(AccountService accountService)
         {
-            _context = context;
-            _rssService = rssService;
-            _mapper = mapper;
+            _accountService = accountService;
         }
 
         [HttpPost("login")]
@@ -30,7 +25,7 @@ namespace DailyNews.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == loginDto.Username && u.PasswordHash == loginDto.Password);
+            var user = await _accountService.LoginAsync(loginDto);
 
             if (user == null)
             {
@@ -45,21 +40,14 @@ namespace DailyNews.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); 
+                return BadRequest(ModelState);
             }
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == register.Username);
-            if(user != null)
+
+            var newUser = await _accountService.RegisterAsync(register);
+            if (newUser == null)
             {
-                return Unauthorized(new { message = "Đăng ký thất bại" });
+                return BadRequest(new { message = "Đăng ký thất bại" });
             }
-
-            var newUser = new Users();
-            newUser.Username = register.Username;
-            newUser.PasswordHash = register.Password;
-            newUser.Email = register.Email;
-
-            await _context.Users.AddAsync(newUser);
-            await _context.SaveChangesAsync();
 
             return Ok(new { message = "Đăng ký thành công", userId = newUser.Id });
         }

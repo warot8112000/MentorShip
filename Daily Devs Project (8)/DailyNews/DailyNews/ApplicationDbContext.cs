@@ -11,7 +11,7 @@ namespace DailyNews
         public DbSet<RSS_Category> RssCategories { get; set; }
         public DbSet<Articles> Articles { get; set; }
         public DbSet<Tags> Tags { get; set; }
-//        public DbSet<ArticleTag> ArticleTags { get; set; }
+        public DbSet<Article_Tags> ArticleTags { get; set; }
 //        public DbSet<Like> Likes { get; set; }
         public DbSet<User_Tags> UserTags { get; set; }
 //        public DbSet<Comment> Comments { get; set; }

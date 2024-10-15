@@ -9,13 +9,13 @@ using DailyNews.DTO;
 
 namespace DailyNews.Services
 {
-    public class RssFeedService
+    public class FetchDataService
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly ILogger<RssFeedService> _logger;
+        private readonly ILogger<FetchDataService> _logger;
 
-        public RssFeedService(ApplicationDbContext context, IHttpClientFactory httpClientFactory, ILogger<RssFeedService> logger)
+        public FetchDataService(ApplicationDbContext context, IHttpClientFactory httpClientFactory, ILogger<FetchDataService> logger)
         {
             _context = context;
             _httpClientFactory = httpClientFactory;
@@ -230,6 +230,95 @@ namespace DailyNews.Services
                     _logger.LogError(ex, $"Error fetching articles from {rssCategory.Url}");
                 }
             }
+        }
+
+        public async Task AddTagsToArticles()
+        {
+            // Lấy tất cả các bài viết từ cơ sở dữ liệu
+            var articles = await _context.Articles.ToListAsync();
+
+            foreach (var article in articles)
+            {
+                // Lấy danh sách các tag từ nội dung bài viết (URL hoặc body)
+                var tagsFromArticle = await GetArticleTags(article.Url);
+
+                // Thêm các tag vào Article_Tags
+                foreach (var tagName in tagsFromArticle)
+                {
+                    // Kiểm tra xem tag đã tồn tại chưa, nếu chưa có thì thêm vào Tags
+                    var tag = await _context.Tags.FirstOrDefaultAsync(t => t.Name == tagName);
+                    if (tag == null)
+                    {
+                        tag = new Tags { Name = tagName };
+                        await _context.Tags.AddAsync(tag);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    // Kiểm tra xem mối quan hệ Article_Tags đã tồn tại chưa
+                    var articleTagExists = await _context.ArticleTags
+                        .AnyAsync(at => at.ArticleId == article.Id && at.TagId == tag.Id);
+
+                    if (!articleTagExists)
+                    {
+                        var articleTag = new Article_Tags
+                        {
+                            ArticleId = article.Id,
+                            TagId = tag.Id
+                        };
+                        await _context.ArticleTags.AddAsync(articleTag);
+                    }
+                }
+            }
+
+            // Lưu các thay đổi vào cơ sở dữ liệu
+            await _context.SaveChangesAsync();
+        }
+
+
+        public async Task<List<string>> GetArticleTags(string url)
+        {
+            var tags = new HashSet<string>(); // Sử dụng HashSet để loại bỏ trùng lặp
+            var httpClient = _httpClientFactory.CreateClient();
+
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(responseBody);
+
+                var linkNodes = htmlDoc.DocumentNode.SelectNodes("//a[@title]");
+
+                if (linkNodes != null)
+                {
+                    foreach (var link in linkNodes)
+                    {
+                        string title = link.GetAttributeValue("title", string.Empty);
+                        string href = link.GetAttributeValue("href", string.Empty);
+
+                        if (IsValidTag(title, href, url))
+                        {
+                            tags.Add(title.Trim());
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogError($"Lỗi khi truy cập trang {url}: {e.Message}");
+            }
+
+            return tags.ToList();
+        }
+
+        private bool IsValidTag(string title, string href, string url)
+        {
+            return !string.IsNullOrWhiteSpace(title) &&
+                   !string.IsNullOrWhiteSpace(href) &&
+                   href.StartsWith("/");
         }
     }
 }

@@ -3,28 +3,24 @@ using DailyNews.DTO;
 using DailyNews.Model;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DailyNews.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoryController : Controller
+    public class CategoryController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IMapper _mapper;
+        private readonly CategoryService _categoryService;
 
-        public CategoryController(ApplicationDbContext context, IMapper mapper)
+        public CategoryController(CategoryService categoryService)
         {
-            _context = context;
-            _mapper = mapper;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategory()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategory()
         {
-            var categories = await _context.Categories.ToListAsync();
-            var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            var categoriesDto = await _categoryService.GetCategoriesAsync();
             return Ok(categoriesDto);
         }
 
@@ -32,14 +28,13 @@ namespace DailyNews.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDto>> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var categoryDto = await _categoryService.GetCategoryByIdAsync(id);
 
-            if (category == null)
+            if (categoryDto == null)
             {
                 return NotFound();
             }
 
-            var categoryDto = _mapper.Map<CategoryDto>(category);
             return Ok(categoryDto);
         }
 
@@ -47,39 +42,19 @@ namespace DailyNews.Controllers
         [HttpPost]
         public async Task<ActionResult<CategoryDto>> PostCategory(CategoryDto categoryDto)
         {
-            var category = _mapper.Map<Category>(categoryDto);
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
-
-            var createdCategoryDto = _mapper.Map<CategoryDto>(category);
-
-            return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, createdCategoryDto);
+            var createdCategoryDto = await _categoryService.CreateCategoryAsync(categoryDto);
+            return CreatedAtAction(nameof(GetCategory), new { id = createdCategoryDto.Id }, createdCategoryDto);
         }
+
 
         // PUT: api/category/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(int id, CategoryDto categoryDto)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var result = await _categoryService.UpdateCategoryAsync(id, categoryDto);
+            if (!result)
             {
                 return NotFound();
-            }
-
-            _mapper.Map(categoryDto, category);
-            _context.Entry(category).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                throw;
             }
 
             return NoContent();
@@ -89,23 +64,13 @@ namespace DailyNews.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var result = await _categoryService.DeleteCategoryAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
-
-        private bool CategoryExists(int id)
-        {
-            return _context.Categories.Any(e => e.Id == id);
-        }
-
-
     }
 }

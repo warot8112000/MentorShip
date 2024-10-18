@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using DailyNews.Mapping;
 using System.Text.Json.Serialization;
+using Quartz;
+using Quartz.Spi;
+using Quartz.Impl;
 
 var builder = WebApplication.CreateBuilder(args);
 // Cấu hình JSON Serializer Options ;cho phép bộ tuần tự hóa xử lý các tham chiếu vòng bằng cách theo dõi các đối tượng đã được tuần tự hóa trước đó.
@@ -34,7 +37,23 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ArticleService>();
 
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
 
+    // Định nghĩa Job
+    var jobKey = new JobKey("fetchArticlesJob");
+    q.AddJob<FetchArticlesJob>(opts => opts.WithIdentity(jobKey));
+
+    // Định nghĩa Trigger (lịch chạy)
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("fetchArticlesJobTrigger")
+        .WithCronSchedule("0 0 * * * ?")); // Chạy hàng ngày vào nửa đêm (giờ UTC)
+});
+
+// Đăng ký dịch vụ QuartzHostedService để chạy Quartz
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

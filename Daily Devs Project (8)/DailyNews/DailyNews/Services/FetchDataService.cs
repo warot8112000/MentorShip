@@ -234,18 +234,14 @@ namespace DailyNews.Services
 
         public async Task AddTagsToArticles()
         {
-            // Lấy tất cả các bài viết từ cơ sở dữ liệu
             var articles = await _context.Articles.ToListAsync();
 
             foreach (var article in articles)
             {
-                // Lấy danh sách các tag từ nội dung bài viết (URL hoặc body)
                 var tagsFromArticle = await GetArticleTags(article.Url);
 
-                // Thêm các tag vào Article_Tags
                 foreach (var tagName in tagsFromArticle)
                 {
-                    // Kiểm tra xem tag đã tồn tại chưa, nếu chưa có thì thêm vào Tags
                     var tag = await _context.Tags.FirstOrDefaultAsync(t => t.Name == tagName);
                     if (tag == null)
                     {
@@ -254,7 +250,6 @@ namespace DailyNews.Services
                         await _context.SaveChangesAsync();
                     }
 
-                    // Kiểm tra xem mối quan hệ Article_Tags đã tồn tại chưa
                     var articleTagExists = await _context.ArticleTags
                         .AnyAsync(at => at.ArticleId == article.Id && at.TagId == tag.Id);
 
@@ -270,7 +265,6 @@ namespace DailyNews.Services
                 }
             }
 
-            // Lưu các thay đổi vào cơ sở dữ liệu
             await _context.SaveChangesAsync();
         }
 
@@ -319,6 +313,66 @@ namespace DailyNews.Services
             return !string.IsNullOrWhiteSpace(title) &&
                    !string.IsNullOrWhiteSpace(href) &&
                    href.StartsWith("/");
+        }
+
+        public async Task FetchLatestArticlesFromRssCategories()
+        {
+            var rssCategories = await _context.RssCategories.ToListAsync();
+            var httpClient = _httpClientFactory.CreateClient();
+
+            foreach (var rssCategory in rssCategories)
+            {
+                try
+                {
+                    // Lấy bài viết gần nhất từ cơ sở dữ liệu
+                    var latestArticleDate = await _context.Articles
+                        .Where(a => a.RssCategoryId == rssCategory.Id)
+                        .OrderByDescending(a => a.PublishedAt)
+                        .Select(a => a.PublishedAt)
+                        .FirstOrDefaultAsync();
+
+                    // Chỉ lấy các bài viết mới hơn ngày gần nhất
+                    var xml = await httpClient.GetStringAsync(rssCategory.Url);
+                    var doc = XDocument.Parse(xml);
+
+                    foreach (var item in doc.Descendants("item"))
+                    {
+                        var publishedDate = DateTime.TryParse(item.Element("pubDate")?.Value, out var pubDate) ? pubDate : DateTime.Now;
+
+                        // Nếu latestArticleDate là DateTime.MinValue nghĩa là chưa có bài viết nào
+                        if (latestArticleDate != DateTime.MinValue && publishedDate <= latestArticleDate)
+                        {
+                            continue; // Bỏ qua bài viết đã được lấy
+                        }
+
+                        var article = new Articles
+                        {
+                            Title = item.Element("title")?.Value ?? "Default Title",
+                            Url = item.Element("link")?.Value ?? "https://default.url",
+                            Content = item.Element("description")?.Value ?? "No content available",
+                            PublishedAt = publishedDate,
+                            RssCategoryId = rssCategory.Id,
+                            Guid = item.Element("guid")?.Value ?? "Default GUID",
+                            EnclosureUrl = item.Element("enclosure")?.Attribute("url")?.Value ?? "https://default.enclosure.url"
+                        };
+
+                        // Kiểm tra xem bài viết đã tồn tại chưa
+                        var existingArticle = await _context.Articles.AnyAsync(a => a.Guid == article.Guid);
+                        if (!existingArticle)
+                        {
+                            await _context.Articles.AddAsync(article);
+                            _logger.LogInformation($"Đã thêm bài viết: {article.Title}");
+                        }
+                    }
+
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation($"Đã lưu thành công bài viết mới từ {rssCategory.Url}");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Lỗi khi lấy bài viết mới từ {rssCategory.Url}");
+                }
+            }
         }
     }
 }

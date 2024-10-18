@@ -18,33 +18,33 @@ namespace DailyNews.Controllers
             _mapper = mapper;
         }
 
-        //Lấy dữ liệu từ RSSCategories -> Articles -> Save in db
-        [HttpPost("fetchArticles")]
+        //get RSSCategories -> Articles -> Save in db
+        [HttpPost("Articles")]
         public async Task<IActionResult> FetchArticles()
         {
             await _rssService.FetchAndSaveArticlesFromRssCategories(); // Gọi dịch vụ để lấy bài viết
             return Ok("Articles fetched and stored successfully."); // Trả về thông báo thành công
         }
 
-        [HttpPost("fetchRssCategories")]
+        [HttpPost("RssCategories")]
         public async Task<IActionResult> FetchRssCategories()
         {
             await _rssService.GetRssCategoriesFromRssSources();
             return Ok("RssCategories fetched and stored successfully.");
         }
 
-        [HttpPost("add-tags")]
-        public async Task<IActionResult> AddTagsToArticles()
-        {
-            try
-            {
-                await _rssService.AddTagsToArticles();
-                return Ok(new { message = "Đã thêm tag cho tất cả các bài viết." });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
+        /* [HttpPost("tags")]
+         public async Task<IActionResult> AddTagsToArticles()
+         {
+             try
+             {
+                 await _rssService.AddTagsToArticles();
+                 return Ok(new { message = "Đã thêm tag cho tất cả các bài viết." });
+             }
+             catch (Exception ex)
+             {
+                 return BadRequest(new { message = ex.Message });
+             }
+         }*/
     }
 }

@@ -71,3 +71,6 @@ C:\Users\macos\source\repos\DailyNews\DailyNews\obj\Debug\net8.0\ref\DailyNews.d
 C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\HtmlAgilityPack.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Quartz.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Quartz.Extensions.DependencyInjection.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Quartz.Extensions.Hosting.dll

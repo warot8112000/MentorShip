@@ -18,6 +18,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping; // Cho phép mã hóa ký tự Unicode đúng cách
 });
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();  // Log ra console
+builder.Logging.AddDebug();
+
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -49,7 +53,7 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("fetchArticlesJobTrigger")
-        .WithCronSchedule("0 0 * * * ?")); // Chạy hàng ngày vào nửa đêm (giờ UTC)
+        .WithCronSchedule("0 0 * * * ?")); 
 });
 
 // Đăng ký dịch vụ QuartzHostedService để chạy Quartz

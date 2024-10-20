@@ -18,19 +18,17 @@ namespace DailyNews.Services
 
         public async Task<Users> LoginAsync(LoginDto loginDto)
         {
-            // Tìm kiếm người dùng dựa trên username và password
             return await _context.Users.FirstOrDefaultAsync(u => u.Username == loginDto.Username && u.PasswordHash == loginDto.Password);
         }
 
         public async Task<Users> RegisterAsync(RegisterDto registerDto)
         {
-            // Kiểm tra xem người dùng đã tồn tại hay chưa
             var existingUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == registerDto.Username);
 
             if (existingUser != null)
             {
-                return null; // Người dùng đã tồn tại
+                return null; 
             }
 
             var newUser = new Users
@@ -42,8 +40,7 @@ namespace DailyNews.Services
 
             await _context.Users.AddAsync(newUser);
             await _context.SaveChangesAsync();
-
-            return newUser; // Trả về người dùng mới được tạo
+            return newUser;
         }
     }
 }

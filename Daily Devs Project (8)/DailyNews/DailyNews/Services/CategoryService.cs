@@ -45,7 +45,7 @@ namespace DailyNews.Services
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
-                return false; // Không tìm thấy category
+                return false; 
             }
 
             _mapper.Map(categoryDto, category);
@@ -64,7 +64,7 @@ namespace DailyNews.Services
                 throw;
             }
 
-            return true; // Cập nhật thành công
+            return true; 
         }
 
         public async Task<bool> DeleteCategoryAsync(int id)
@@ -72,12 +72,12 @@ namespace DailyNews.Services
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
-                return false; // Không tìm thấy category
+                return false; 
             }
 
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
-            return true; // Xóa thành công
+            return true; 
         }
 
         private bool CategoryExists(int id)

@@ -28,22 +28,21 @@ namespace DailyNews.Services
 
         public async Task<Articles> CreateArticleAsync(ArticleDto articleDto)
         {
-            // Kiểm tra RssCategory hợp lệ
             var rssCategory = await _context.RssCategories
-                .Include(c => c.RssSource) // Kết nối với bảng RssSource
-                .Include(c => c.Category)   // Kết nối với bảng Category
+                .Include(c => c.RssSource) 
+                .Include(c => c.Category)   
                 .FirstOrDefaultAsync(c => c.Id == articleDto.RssCategoryId);
 
             if (rssCategory == null)
             {
-                return null; // RssCategory không tồn tại
+                return null;
             }
 
             var article = _mapper.Map<Articles>(articleDto);
             await _context.Articles.AddAsync(article);
             await _context.SaveChangesAsync();
 
-            return article; // Trả về bài viết đã tạo
+            return article; 
         }
 
         public async Task<bool> UpdateArticleAsync(int id, ArticleDto articleDto)
@@ -51,22 +50,20 @@ namespace DailyNews.Services
             var article = await _context.Articles.FindAsync(id);
             if (article == null)
             {
-                return false; // Bài viết không tồn tại
+                return false; 
             }
 
-            _mapper.Map(articleDto, article); // Cập nhật thông tin từ DTO vào entity
+            _mapper.Map(articleDto, article); 
 
             _context.Entry(article).State = EntityState.Modified;
 
-            try
+            var affectedRows = await _context.SaveChangesAsync(); 
+
+            if (affectedRows == 0)
             {
-                await _context.SaveChangesAsync();
-                return true; // Cập nhật thành công
+                throw new Exception("No records were updated."); 
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                return false; // Xảy ra lỗi trong quá trình cập nhật
-            }
+            return true;
         }
 
         public async Task<bool> DeleteArticleAsync(int id)
@@ -74,12 +71,12 @@ namespace DailyNews.Services
             var article = await _context.Articles.FindAsync(id);
             if (article == null)
             {
-                return false; // Bài viết không tồn tại
+                return false; 
             }
 
             _context.Articles.Remove(article);
             await _context.SaveChangesAsync();
-            return true; // Xóa thành công
+            return true; 
         }
 
         public async Task<bool> ArticleExistsAsync(int id)

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using DailyNews.DTO;
 using DailyNews.Model;
+using DailyNews.Response;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailyNews.Controllers
 {
@@ -18,10 +20,22 @@ namespace DailyNews.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Articles>>> GetArticles()
+        public async Task<ActionResult<PagedResponse<ArticleDto>>> GetArticles(int pageNumber = 1, int pageSize = 10)
         {
-            var articles = await _articleService.GetArticlesAsync();
-            return Ok(articles);
+            if (pageNumber < 1)
+            {
+                return BadRequest("Page number must be greater than 0.");
+            }
+            if (pageSize < 1 || pageSize > 20) 
+            {
+                return BadRequest("Page size must be between 1 and 20.");
+            }
+            var totalArticles = await _articleService.GetTotalArticle();
+            var articles = await _articleService.GetArticlesAsync(pageNumber, pageSize);
+
+            var response = new PagedResponse<ArticleDto>(totalArticles, pageNumber, pageSize, articles);
+
+            return Ok(response);
         }
 
         // GET: api/article/{id}

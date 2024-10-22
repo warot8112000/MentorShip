@@ -10,5 +10,7 @@ namespace DailyNews.Model
         public string Description { get; set; }
 
         public ICollection<RSS_Category> RssCategories { get; set; }
+        public ICollection<Article_Category> ArticleCategory { get; set; }
+
     }
 }

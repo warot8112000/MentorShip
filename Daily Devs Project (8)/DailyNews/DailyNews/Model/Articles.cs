@@ -19,5 +19,10 @@ namespace DailyNews.Model
 
         public RSS_Category RssCategory { get; set; }
         public ICollection<Article_Tags> ArticleTags { get; set; }
+        public ICollection<Article_Category> ArticleCategory { get; set; }
+        public ICollection<Likes> ArticleLike { get; set; }
+        public ICollection<Comments> ArticleComment { get; set; }
+
+
     }
 }

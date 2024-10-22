@@ -12,9 +12,9 @@ namespace DailyNews
         public DbSet<Articles> Articles { get; set; }
         public DbSet<Tags> Tags { get; set; }
         public DbSet<Article_Tags> ArticleTags { get; set; }
-//        public DbSet<Like> Likes { get; set; }
+        public DbSet<Likes> Likes { get; set; }
         public DbSet<User_Tags> UserTags { get; set; }
-//        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Comments> Comments { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -64,6 +64,47 @@ namespace DailyNews
                 .HasOne(at => at.Tag)
                 .WithMany(t => t.ArticleTags)
                 .HasForeignKey(at => at.TagId);
+
+
+            // Định nghĩa cho bang trung gian
+            modelBuilder.Entity<Article_Category>()
+        .HasKey(ac => new { ac.ArticleId, ac.CategoryId });
+
+            modelBuilder.Entity<Article_Category>()
+                .HasOne(ac => ac.Article)
+                .WithMany(a => a.ArticleCategory)
+                .HasForeignKey(ac => ac.ArticleId);
+
+            modelBuilder.Entity<Article_Category>()
+                .HasOne(ac => ac.Category)
+                .WithMany(c => c.ArticleCategory)
+                .HasForeignKey(ac => ac.CategoryId);
+
+            modelBuilder.Entity<Comments>()
+               .HasOne(c => c.User)
+               .WithMany(u => u.UserComments)
+               .HasForeignKey(c => c.UserId);
+
+            modelBuilder.Entity<Comments>()
+                .HasOne(c => c.Article)
+                .WithMany(a => a.ArticleComment) // Thêm thuộc tính ICollection<Comments> vào Articles
+                .HasForeignKey(c => c.ArticleId);
+
+            // Cấu hình Likes
+            modelBuilder.Entity<Likes>()
+                .HasKey(l => new { l.UserId, l.ArticleId }); 
+
+            modelBuilder.Entity<Likes>()
+                .HasOne(l => l.User)
+                .WithMany(u => u.UserLikes) 
+                .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Cascade); 
+
+            modelBuilder.Entity<Likes>()
+                .HasOne(l => l.Article)
+                .WithMany() 
+                .HasForeignKey(l => l.ArticleId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

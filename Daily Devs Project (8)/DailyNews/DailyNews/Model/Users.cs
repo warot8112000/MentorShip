@@ -13,5 +13,8 @@ namespace DailyNews.Model
 
         public string PasswordHash { get; set; }
         public ICollection<User_Tags> UserTags { get; set; }
+        public ICollection<Likes> UserLikes { get; set; }
+        public ICollection<Comments> UserComments { get; set; }
+
     }
 }

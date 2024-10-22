@@ -2,6 +2,7 @@
 using DailyNews.DTO;
 using DailyNews.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace DailyNews.Services
 {
@@ -16,14 +17,36 @@ namespace DailyNews.Services
             _mapper = mapper;
         }
 
-        public async Task<List<Articles>> GetArticlesAsync()
+        public async Task<IEnumerable<ArticleDto>> GetArticlesAsync(int pageNumber, int pageSize)
         {
-            return await _context.Articles.ToListAsync();
+            var articles = await _context.Articles
+                                 .Skip((pageNumber - 1) * pageSize)
+                                 .Take(pageSize)
+                                 .ToListAsync();
+            var articlesDto = _mapper.Map<IEnumerable<ArticleDto>>(articles);
+            return articlesDto;
         }
 
-        public async Task<Articles> GetArticleByIdAsync(int id)
+        public async Task<List<Articles>> GetArticlesAsync()
         {
-            return await _context.Articles.FindAsync(id);
+            var articlesDto = await _context.Articles.ToListAsync();
+            return articlesDto;
+        }
+
+        public async Task<int> GetTotalArticle()
+        {
+            return await _context.Articles.CountAsync();
+        }
+        public async Task<ArticleDto> GetArticleByIdAsync(int id)
+        {
+            var article = await _context.Articles.FindAsync(id);
+            if (article == null)
+            {
+                return null; 
+            }
+            var articleDto = _mapper.Map<ArticleDto>(article);
+
+            return articleDto;
         }
 
         public async Task<Articles> CreateArticleAsync(ArticleDto articleDto)

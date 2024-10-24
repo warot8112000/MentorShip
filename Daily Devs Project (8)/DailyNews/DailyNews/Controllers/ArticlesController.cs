@@ -5,6 +5,7 @@ using DailyNews.Response;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DailyNews.Controllers
 {
@@ -86,6 +87,22 @@ namespace DailyNews.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpDelete("old-articles/{date}")]
+        public async Task<IActionResult> DeleteOldArticles(DateTime date)
+        {
+            var count = _articleService.DeleteArticlesOlderThan(date);
+
+            return Ok(new { message = $"{count} bài báo cũ hơn {date} đã được xóa." });
+        }
+
+        [HttpDelete("by-category/{categoryId}")]
+        public async Task<IActionResult> DeleteArticlesByCategory(int categoryId)
+        {
+            var count = _articleService.DeleteArticlesByCategory(categoryId);
+
+            return Ok(new { message = $"{count} bài báo thuộc danh mục {categoryId} đã được xóa." });
         }
     }
 }

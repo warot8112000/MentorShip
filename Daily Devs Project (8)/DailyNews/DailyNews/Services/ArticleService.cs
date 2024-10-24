@@ -17,9 +17,11 @@ namespace DailyNews.Services
             _mapper = mapper;
         }
 
+        //GET Method
         public async Task<IEnumerable<ArticleDto>> GetArticlesAsync(int pageNumber, int pageSize)
         {
             var articles = await _context.Articles
+                                 .OrderByDescending(a => a.CreatedAt)
                                  .Skip((pageNumber - 1) * pageSize)
                                  .Take(pageSize)
                                  .ToListAsync();
@@ -32,11 +34,7 @@ namespace DailyNews.Services
             var articlesDto = await _context.Articles.ToListAsync();
             return articlesDto;
         }
-
-        public async Task<int> GetTotalArticle()
-        {
-            return await _context.Articles.CountAsync();
-        }
+        
         public async Task<ArticleDto> GetArticleByIdAsync(int id)
         {
             var article = await _context.Articles.FindAsync(id);
@@ -48,6 +46,16 @@ namespace DailyNews.Services
 
             return articleDto;
         }
+
+        public async Task<List<Articles>> GetArticlesByCategory(int categoryId)
+        {
+            return await _context.Articles
+                .Where(a => a.RssCategoryId == categoryId) // Điều kiện theo danh mục
+                .OrderByDescending(a => a.PublishedAt)
+                .ToListAsync();
+        }
+
+        //POST method
 
         public async Task<Articles> CreateArticleAsync(ArticleDto articleDto)
         {
@@ -68,6 +76,7 @@ namespace DailyNews.Services
             return article; 
         }
 
+        //PUT Method
         public async Task<bool> UpdateArticleAsync(int id, ArticleDto articleDto)
         {
             var article = await _context.Articles.FindAsync(id);
@@ -89,6 +98,7 @@ namespace DailyNews.Services
             return true;
         }
 
+        //DELETE Method
         public async Task<bool> DeleteArticleAsync(int id)
         {
             var article = await _context.Articles.FindAsync(id);
@@ -100,6 +110,43 @@ namespace DailyNews.Services
             _context.Articles.Remove(article);
             await _context.SaveChangesAsync();
             return true; 
+        }
+
+
+        public async Task<int> DeleteArticlesOlderThan(DateTime date)
+        {
+            var oldArticles = await _context.Articles
+                .Where(a => a.PublishedAt < date)
+                .ToListAsync();
+
+            if (oldArticles.Any())
+            {
+                _context.Articles.RemoveRange(oldArticles);
+                return await _context.SaveChangesAsync();  
+            }
+
+            return 0;  
+        }
+
+        public async Task<int> DeleteArticlesByCategory(int categoryId)
+        {
+            var articles = await _context.Articles
+                                         .Where(a => a.RssCategoryId == categoryId)
+                                         .ToListAsync();
+
+            if (articles.Any())
+            {
+                _context.Articles.RemoveRange(articles);
+                return await _context.SaveChangesAsync();
+            }
+
+            return 0;
+        }
+
+        //
+        public async Task<int> GetTotalArticle()
+        {
+            return await _context.Articles.CountAsync();
         }
 
         public async Task<bool> ArticleExistsAsync(int id)

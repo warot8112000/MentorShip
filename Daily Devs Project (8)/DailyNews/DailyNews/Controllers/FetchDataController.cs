@@ -22,8 +22,8 @@ namespace DailyNews.Controllers
         [HttpPost("Articles")]
         public async Task<IActionResult> FetchArticles()
         {
-            await _rssService.FetchAndSaveArticlesFromRssCategories(); // Gọi dịch vụ để lấy bài viết
-            return Ok("Articles fetched and stored successfully."); // Trả về thông báo thành công
+            await _rssService.FetchAndSaveArticlesFromRssCategories();
+            return Ok("Articles fetched and stored successfully."); 
         }
 
         [HttpPost("RssCategories")]

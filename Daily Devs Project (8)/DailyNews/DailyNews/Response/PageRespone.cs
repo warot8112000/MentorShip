@@ -2,18 +2,18 @@
 {
     public class PagedResponse<T>
     {
-        public int TotalArticles { get; set; }
+        public int TotalCount { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public int TotalPages { get; set; }
         public IEnumerable<T> Data { get; set; }
 
-        public PagedResponse(int totalArticles, int pageNumber, int pageSize, IEnumerable<T> data)
+        public PagedResponse(int totalCount, int pageNumber, int pageSize, IEnumerable<T> data)
         {
-            TotalArticles = totalArticles;
+            TotalCount = totalCount;
             PageNumber = pageNumber;
             PageSize = pageSize;
-            TotalPages = (int)Math.Ceiling((double)totalArticles / pageSize);
+            TotalPages = (int)Math.Ceiling((double)totalCount / pageSize);
             Data = data;
         }
     }

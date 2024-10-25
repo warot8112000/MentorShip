@@ -4,6 +4,7 @@ using DailyNews.Model;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace DailyNews.Controllers
 {
@@ -19,10 +20,15 @@ namespace DailyNews.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        [EnableQuery] 
+        public IActionResult GetUsers(ODataQueryOptions<Users> queryOptions) //IActionResult cho phép trả về các kiểu dữ liệu khác nhau
         {
-            var userDtos = await _userService.GetUsersAsync();
-            return Ok(userDtos);
+            var users = _userService.GetUsersQueryable();
+
+            // Use queryOptions.ApplyTo to apply OData options on IQueryable
+            var queryableUsers = (IQueryable<Users>)queryOptions.ApplyTo(users); //áp dụng các tùy chọn truy vấn OData vào Users
+
+            return Ok(queryableUsers);
         }
 
         [HttpGet("{id}")]

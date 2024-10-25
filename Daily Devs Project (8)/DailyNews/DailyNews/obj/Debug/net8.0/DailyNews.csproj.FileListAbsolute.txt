@@ -74,3 +74,8 @@ C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\HtmlAgilityPack
 C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Quartz.dll
 C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Quartz.Extensions.DependencyInjection.dll
 C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Quartz.Extensions.Hosting.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Microsoft.AspNetCore.OData.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Microsoft.OData.Core.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Microsoft.OData.Edm.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Microsoft.OData.ModelBuilder.dll
+C:\Users\macos\source\repos\DailyNews\DailyNews\bin\Debug\net8.0\Microsoft.Spatial.dll

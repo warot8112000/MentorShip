@@ -15,6 +15,12 @@ namespace DailyNews.Services
             _context = context;
             _mapper = mapper;
         }
+        
+        public IQueryable<Users> GetUsersQueryable() // get users by IQueryable
+        {
+            // Trả về IQueryable - cho phép truy vấn linh hoạt
+            return _context.Users.AsQueryable();
+        }
 
         public async Task<List<UserDto>> GetUsersAsync()
         {

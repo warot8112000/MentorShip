@@ -1,13 +1,12 @@
 ﻿using DailyNews;
 using DailyNews.Services;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
 using DailyNews.Mapping;
 using System.Text.Json.Serialization;
 using Quartz;
-using Quartz.Spi;
-using Quartz.Impl;
+using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Batch;
+using DailyNews.OData;
 
 var builder = WebApplication.CreateBuilder(args);
 // Cấu hình JSON Serializer Options ;cho phép bộ tuần tự hóa xử lý các tham chiếu vòng bằng cách theo dõi các đối tượng đã được tuần tự hóa trước đó.
@@ -21,6 +20,18 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();  
 builder.Logging.AddDebug();
+
+builder.Services.AddControllers()
+    .AddOData(opt => opt
+        .AddRouteComponents("odata", ODataModelBuilder.GetEdmModel()) 
+        .Select()
+        .Filter()
+        .OrderBy()
+        .Expand()
+        .SetMaxTop(100)
+        .Count());
+
+
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -63,6 +74,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers(); // Ánh xạ các controller
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

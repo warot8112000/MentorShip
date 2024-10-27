@@ -15,7 +15,16 @@ namespace DailyNews.Services
             _context = context;
             _mapper = mapper;
         }
-
+        //OData 
+        public IQueryable<Category> GetCategoriesQueryable()
+        {
+            return (IQueryable<Category>)_context.Categories.Select(Cate => new CategoryDto
+            {
+                Id = Cate.Id,
+                Name = Cate.Name,
+                Description = Cate.Description
+            }).AsQueryable();
+        }
         public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
         {
             var categories = await _context.Categories.ToListAsync();

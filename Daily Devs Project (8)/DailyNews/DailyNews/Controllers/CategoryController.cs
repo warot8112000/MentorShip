@@ -3,6 +3,7 @@ using DailyNews.DTO;
 using DailyNews.Model;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace DailyNews.Controllers
 {
@@ -17,8 +18,17 @@ namespace DailyNews.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategory()
+        [HttpGet("odata")]
+        [EnableQuery]
+        public ActionResult<IQueryable<CategoryDto>> GetCategoryiesOdata()
+        {
+            var categoriesQueryable = _categoryService.GetCategoriesQueryable();
+
+            return Ok(categoriesQueryable);
+        }
+
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories()
         {
             var categoriesDto = await _categoryService.GetCategoriesAsync();
             return Ok(categoriesDto);

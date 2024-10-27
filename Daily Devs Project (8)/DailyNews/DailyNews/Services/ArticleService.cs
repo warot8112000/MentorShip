@@ -17,6 +17,21 @@ namespace DailyNews.Services
             _mapper = mapper;
         }
 
+        //OData Queryable
+        public IQueryable<ArticleDto> GetArticlesQueryable()
+        {
+            return _context.Articles.Select(article => new ArticleDto
+            {
+                Title = article.Title,
+                Url = article.Url,
+                Content = article.Content,
+                PublishedAt = article.PublishedAt,
+                RssCategoryId = article.RssCategoryId,
+                Guid = article.Guid,
+                EnclosureUrl = article.EnclosureUrl
+            }).AsQueryable();
+        }
+
         //GET Method
         public async Task<IEnumerable<ArticleDto>> GetArticlesAsync(int pageNumber, int pageSize)
         {

@@ -4,6 +4,7 @@ using DailyNews.Model;
 using DailyNews.Response;
 using DailyNews.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -20,16 +21,25 @@ namespace DailyNews.Controllers
             _articleService = articleService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<PagedResponse<ArticleDto>>> GetArticles(int pageNumber = 1, int pageSize = 10)
+        [HttpGet("odata")]
+        [EnableQuery] 
+        public ActionResult<IQueryable<ArticleDto>> GetArticlesOData()
+        {
+            var articlesQueryable = _articleService.GetArticlesQueryable();
+
+            return Ok(articlesQueryable);
+        }
+
+        [HttpGet("paginated")]
+        public async Task<ActionResult<PagedResponse<ArticleDto>>> GetPaginatedArticles(int pageNumber = 1, int pageSize = 10)
         {
             if (pageNumber < 1)
             {
-                return BadRequest("Page number must be greater than 0.");
+                pageNumber = 1;
             }
-            if (pageSize < 1 || pageSize > 20) 
+            if (pageSize < 10 || pageSize > 20) 
             {
-                return BadRequest("Page size must be between 1 and 20.");
+                pageSize = 10;
             }
             var totalArticles = await _articleService.GetTotalArticle();
             var articles = await _articleService.GetArticlesAsync(pageNumber, pageSize);

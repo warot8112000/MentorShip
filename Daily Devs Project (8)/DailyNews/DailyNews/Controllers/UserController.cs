@@ -10,6 +10,7 @@ namespace DailyNews.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Route("odata/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;

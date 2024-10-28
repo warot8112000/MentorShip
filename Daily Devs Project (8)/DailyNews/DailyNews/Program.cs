@@ -50,6 +50,10 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ArticleService>();
+builder.Services.AddScoped<RSS_SourcesService>();
+builder.Services.AddScoped<RSS_CategoryService>();
+
+
 
 var cronSchedule = builder.Configuration["Quartz:FetchArticlesCronSchedule"];
 
